@@ -12,9 +12,18 @@ router.post('/', async (req, res) => {
 
   try {
     const reply = await askEva(message);
-    const maxLength = 180;
-    const truncatedReply = reply.length > maxLength ? reply.slice(0, maxLength).trim() + '...' : reply;
-    res.json({ response: truncatedReply });
+    const maxLength = 200;
+    let finalReply = reply;
+
+    if (reply.length > maxLength) {
+      const truncated = reply.slice(0, maxLength);
+      const lastPeriod = truncated.lastIndexOf('.');
+
+      
+      finalReply = lastPeriod !== -1 ? truncated.slice(0, lastPeriod + 1) : truncated.trim();
+    }
+
+    res.json({ response: finalReply });
   } catch (error) {
     console.error('Error al procesar el mensaje:', error);
     res.status(500).json({ error: 'Error interno al generar la respuesta.' });
