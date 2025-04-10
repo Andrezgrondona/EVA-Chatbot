@@ -1,20 +1,38 @@
-// routes/chat.js
-const express = require('express');
-const router = express.Router();
-const { askEva } = require('../services/eva');
+import express from "express";
 
-router.post('/', async (req, res) => {
+const router = express.Router();
+
+router.post("/", async (req, res) => {
   const { message } = req.body;
 
-  if (!message) return res.status(400).json({ error: 'Mensaje requerido' });
-
   try {
-    const response = await askEva(message);
-    res.json({ response });
+    const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+      method: "POST",
+      headers: {
+        Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+        "Content-Type": "application/json",
+        "HTTP-Referer": "https://tusitio.com", // opcional, puedes poner tu dominio aquí
+        "X-Title": "Eva Chatbot"
+      },
+      body: JSON.stringify({
+        model: "mistralai/mistral-7b-instruct", // puedes cambiar el modelo
+        messages: [
+          {
+            role: "user",
+            content: message,
+          },
+        ],
+      }),
+    });
+
+    const data = await response.json();
+    const reply = data.choices?.[0]?.message?.content || "No se pudo obtener una respuesta.";
+
+    res.json({ response: reply });
   } catch (error) {
-    console.error('Error al consultar a Eva:', error);
-    res.status(500).json({ error: 'Error al procesar la respuesta' });
+    console.error("Error al comunicarse con OpenRouter:", error);
+    res.status(500).json({ error: "Error interno al consultar el modelo." });
   }
 });
 
-module.exports = router;
+export default router;
