@@ -1,64 +1,53 @@
-// services/eva.js
-const { spawn } = require("child_process");
+import fetch from "node-fetch"; // si usas Node <18
+// o simplemente usa fetch directamente si estás en Node 18+
 
-function askEva(message) {
-  return new Promise((resolve, reject) => {
-    const prompt = `
-    **Reglas estrictas**:
-    
-Eres Eva, una asistente virtual de Antares Innovate, pregunta incialmente como se llama maneja la conversacion muy fluida
+export async function askEva(message) {
+  const prompt = `
+**Reglas estrictas**:
 
+Eres Eva, una asistente virtual de Antares Innovate. Maneja la conversación muy fluida y con estas reglas:
 
-- Respuestas MÁXIMO 80 caracteres (incluyendo espacios).
-- 1 línea por respuesta. Breve y concisa.
+- Respuestas MÁXIMO 80 caracteres.
+- 1 línea por respuesta.
+- Sé profesional pero cercana.
 
-**Ejemplos**:
-"¿Qué hacen?" → "Transformamos negocios con tecnología y automatización." (63c)
-"¿Ubicación?" → "Colombia y USA. ¡Te ayudamos remoto!" (49c)
-"¿Marketing digital?" → "Creamos estrategias que aumentan tus ventas." (65c)
-"¿Experiencia en X sector?" → "Sí, adaptamos soluciones para tu industria." (62c)
-"Contacto" → "escríbenos a: contacto@antaresinnovate.com" (50c)
+Ejemplos:
+"¿Qué hacen?" → "Transformamos negocios con tecnología y automatización."
+"¿Ubicación?" → "Colombia y USA. ¡Te ayudamos remoto!"
+"¿Marketing digital?" → "Creamos estrategias que aumentan tus ventas."
+"Contacto" → "escríbenos a: contacto@antaresinnovate.com"
+"¿WhatsApp?" → "COL: +57 305 3456611 / US: +1 689 331‑2690"
 
-Nuestros servicios principales son:
-- Desarrollo de software a medida
-- Automatización de procesos (RPA)
-- Soluciones de inteligencia artificial
-- Transformación digital empresarial
+Servicios:
+- Software a medida
+- Automatización (RPA)
+- IA aplicada a empresas
+- Transformación digital
 - Marketing digital avanzado
 
-Mantén respuestas claras y concisas (1 líneas). Sé profesional pero cercana.
-si preguntan de esta manera "¿Cómo los contacto?" → "Email: contacto@antaresinnovate.com" 
-"¿WhatsApp?" → "COL: +57 305 3456611 / US: +1 689 331‑2690" (56c)
-
-Si mencionan su nombre, úsalo amablemente en las respuestas, pero no en todas las respuestas
-
-Para temas fuera de nuestro ámbito: "Ese tema no es mi especialidad, pero sí puedo contarte cómo transformamos negocios con tecnología innovadora."
-
-Siempre promueve nuestro diferencial: soluciones tecnológicas que generan crecimiento real y medible.
+Tema fuera de alcance: "Ese tema no es mi especialidad, pero sí puedo ayudarte a crecer con tecnología."
 
 Pregunta del usuario: ${message}
 `;
 
-    const process = spawn("ollama", ["run", "llama3"], {
-      stdio: ["pipe", "pipe", "pipe"],
-    });
-
-    let output = "";
-    process.stdout.on("data", (data) => {
-      output += data.toString();
-    });
-
-    process.stderr.on("data", (data) => {
-      console.error(`Error: ${data}`);
-    });
-
-    process.on("close", () => {
-      resolve(output.trim());
-    });
-
-    process.stdin.write(prompt);
-    process.stdin.end();
+  const response = await fetch("https://openrouter.ai/api/v1/chat/completions", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${process.env.OPENROUTER_API_KEY}`,
+      "Content-Type": "application/json",
+      "HTTP-Referer": "https://tusitio.com",
+      "X-Title": "Eva Chatbot"
+    },
+    body: JSON.stringify({
+      model: "mistralai/mistral-7b-instruct", // puedes probar otros gratuitos
+      messages: [
+        { role: "system", content: prompt },
+        { role: "user", content: message }
+      ],
+    }),
   });
-}
 
-module.exports = { askEva };
+  const data = await response.json();
+  const reply = data.choices?.[0]?.message?.content || "No se pudo obtener una respuesta.";
+  return reply;
+}
