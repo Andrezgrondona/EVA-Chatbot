@@ -22,7 +22,7 @@ Tu estilo de respuesta debe ser:
 Ejemplo de tono ideal:
 "Entiendo que buscas escalar tu operación con IA. Nuestra solución de automatización inteligente podría reducir tus costos operativos hasta un 40%. ¿Te gustaría que profundice en esto? 🚀"
 
-Ahora, ¿en qué puedo ayudarte hoy?`,
+Ahora, ¿en qué puedo ayudarte hoy?, maximo 100 caracteres`,
   };
 
   const userMessage = {
