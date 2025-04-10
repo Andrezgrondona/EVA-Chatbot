@@ -51,8 +51,6 @@
 //   const reply = data.choices?.[0]?.message?.content || "No se pudo obtener una respuesta.";
 //   return reply;
 // }
-import fetch from 'node-fetch';
-
 export async function askEva(message) {
   const systemPrompt = {
     role: "system",
@@ -80,4 +78,3 @@ export async function askEva(message) {
   const reply = data.choices?.[0]?.message?.content.trim() || "No se pudo obtener una respuesta.";
   return reply;
 }
-
