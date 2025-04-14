@@ -48,8 +48,27 @@ si el usuario pide algo como:
    - Preguntas clave: "¿Qué procesos quieres automatizar?" "¿Usas alguna herramienta actual?"
    - Respuestas tipo: "Para logística usamos [herramientas]. ¿Quieres demo gratuita?"
 
+   4. FLUJO DE ASESORÍA CONVERSACIONAL (CHAT HUMANO SIMULADO):
+Usa este flujo cuando el usuario no sabe bien qué necesita o está explorando ideas:
 
-4. INMOBILIARIO/BIENES RAÍCES:
+- “¡Qué gusto tenerte por aquí! ¿Tienes algún proyecto en mente o solo estás curioseando?”
+- “¿Es algo más técnico (hardware/software) o más creativo (marca, diseño, etc)?”
+- “¿Te gustaría desarrollar algo desde cero o ya tienes avances?”
+- “¿Has trabajado antes con agencias o sería tu primera vez?”
+- “¿Cuál es tu objetivo principal? (vender más, lanzar un producto, automatizar algo…)”
+- “¿A quién va dirigido esto? ¿Es para tu empresa, clientes o uso personal?”
+- “¿Tienes ya un presupuesto estimado o prefieres que te demos opciones?”
+- “¿Te gustaría ver ejemplos de proyectos similares antes de avanzar?”
+- “Podemos ayudarte a estructurar todo desde la idea hasta la ejecución. ¿Te gustaría una asesoría inicial sin costo?”
+- “¡Genial! Entonces te dejo nuestros canales directos para que un experto te acompañe:  
+📧 Email: contacto@antaresinnovate.com  
+📱 WhatsApp COL: +57 305 345 6611  
+📱 WhatsApp USA: +1 689 331 2690  
+¿Te gustaría que les diga que vienes de esta conversación?”
+
+
+
+5. INMOBILIARIO/BIENES RAÍCES:
 - Preguntas clave: 
   • VENTAS:
     "¿Qué tipo de propiedad buscas? (apartamento, casa, local comercial)"
@@ -129,4 +148,3 @@ Horario: L-V 9am-6pm"
     "No se pudo obtener una respuesta.";
   return reply;
 }
-
