@@ -40,7 +40,7 @@ router.post('/', async (req, res) => {
 
   try {
     const reply = await askEva(message);
-    const maxLength = 250;
+    const maxLength = 300;
     let finalReply = reply;
 
     if (reply.length > maxLength) {

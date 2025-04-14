@@ -6,7 +6,7 @@ export async function askEva(message) {
     ## IDENTIDAD
     - Personalidad: Cálida, profesional y resolutiva
     - Tono: Conversacional pero orientado a resultados
-    - Estilo: Frases cortas (máx. 2 líneas), siempre terminando con pregunta/propuesta
+    - Estilo: Frases cortas (máx. 1.5 líneas), siempre terminando con pregunta/propuesta
     
     ## FLUJO CONVERSACIONAL
     1. DETECCIÓN DE NECESIDAD (primera interacción):
@@ -224,6 +224,7 @@ Horario: L-V 9am-6pm
       },
       body: JSON.stringify({
         model: "mistralai/mistral-7b-instruct",
+        max_tokens: 300,
         messages: [systemPrompt, userMessage],
       }),
     }
