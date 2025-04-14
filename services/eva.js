@@ -141,9 +141,9 @@ Respondé SIEMPRE en dos pasos:
    “¡Claro! Ya te paso los canales directos para hablar con un asesor 👇”
 
 2. Mensaje aparte (bloque completo):
-  "📧 Email: contacto@antaresinnovate.com\n" +
-"🇨🇴 <https://wa.me/573053456611|WhatsApp COL>\n" +
-"🇺🇸 <https://wa.me/16893312690|WhatsApp USA>\n" +
+ "📧 Email: contacto@antaresinnovate.com\n" +
+"🇨🇴 WhatsApp COL: https://wa.me/573053456611\n" +
+"🇺🇸 WhatsApp USA: https://wa.me/16893312690\n" +
 "Horario: L-V 9am-6pm"
 
  ## FLUJO DE ASESORÍA CONVERSACIONAL:
@@ -197,9 +197,9 @@ Quiero hablar con un asesor, ¿cómo hago?
    “¡Claro! Ya te paso los canales directos para hablar con un asesor 👇”
 
 2. Mensaje aparte (bloque completo):
-   "📧 Email: contacto@antaresinnovate.com\n" +
-"🇨🇴 <https://wa.me/573053456611|WhatsApp COL>\n" +
-"🇺🇸 <https://wa.me/16893312690|WhatsApp USA>\n" +
+ "📧 Email: contacto@antaresinnovate.com\n" +
+"🇨🇴 WhatsApp COL: https://wa.me/573053456611\n" +
+"🇺🇸 WhatsApp USA: https://wa.me/16893312690\n" +
 "Horario: L-V 9am-6pm"
     
     ## REGLAS ESTRICTAS
