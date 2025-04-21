@@ -4,14 +4,15 @@ import { askEva } from "../services/eva.js";
 const router = express.Router();
 
 router.post("/", async (req, res) => {
-  const { message } = req.body;
+  const { message, lang } = req.body;
 
   if (!message) {
     return res.status(400).json({ error: "Mensaje no proporcionado." });
   }
 
   try {
-    const reply = await askEva(message);
+    const reply = await askEva(message, lang || "es");
+    //const reply = await askEva(message);
     const maxLength = 300;
     let finalReply = reply;
 
